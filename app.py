@@ -72,10 +72,6 @@ col_graf1, col_graf2 = st.columns(2)
 with col_graf1:
     if not df_filtrado.empty:
         top_cargos = df_filtrado.groupby('cargo')['usd'].mean().nlargest(10).sort_values(ascending=True).reset_index()
-        '''df_filtrado.groupby('cargo')['usd'].mean(): Agrupa o DataFrame df_filtrado pela coluna 'cargo' (cargos/posições). Para cada grupo (cargo), calcula a média dos salários na coluna 'usd'.
-         .nlargest(10): Seleciona os 10 maiores valores da média salarial calculada (ou seja, os 10 cargos com maior salário médio).
-         .sort_values(ascending=True): Ordena os 10 maiores cargos por salário médio em ordem crescente (do menor para o maior), geralmente para facilitar a visualização no gráfico horizontal.
-         .reset_index(): Reseta o índice para transformar o resultado em um DataFrame normal com índices padrão (0, 1, 2...), facilitando a manipulação depois.'''
         grafico_cargos = px.bar(
             top_cargos,
             x='usd',
@@ -86,9 +82,6 @@ with col_graf1:
         )
         grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
         st.plotly_chart(grafico_cargos, use_container_width=True)
-        '''st.plotly_chart(): é uma função do Streamlit que exibe um gráfico criado com a biblioteca Plotly diretamente na sua aplicação web.
-           grafico_cargos: é o objeto do gráfico Plotly (no seu caso, um gráfico de barras) que será renderizado na página.
-           use_container_width=True: faz com que o gráfico ocupe toda a largura disponível dentro do container onde ele está inserido, deixando o gráfico responsivo e adaptado ao tamanho da tela ou coluna onde está.'''
     else:
         st.warning("Nenhum dado para exibir no gráfico de cargos.")
 
@@ -145,4 +138,5 @@ st.subheader("Dados Detalhados")
 st.dataframe(df_filtrado)
 
 #Alguns países estão em branco é pq não há dados sobre eles
+
      
